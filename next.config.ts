@@ -2,8 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  images: { unoptimized: true },
-  reactStrictMode: true,
+  basePath: "/shiraz-metro-live",
+  assetPrefix: "/shiraz-metro-live/",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
