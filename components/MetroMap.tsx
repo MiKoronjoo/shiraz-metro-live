@@ -341,7 +341,7 @@ export default function MetroMap({
                       >
                         <Tooltip
                           direction="top"
-                          offset={[0, 0]}
+                          offset={[80, 0]}
                           opacity={0.95}
                         >
                           <strong>{station.name[language]}</strong>
