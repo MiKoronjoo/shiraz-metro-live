@@ -321,20 +321,25 @@ export default function MetroMap({
                       {/* Larger invisible interaction area */}
                       <CircleMarker
                         center={station.position}
-                        radius={12}
+                        radius={14}
+                        interactive={true}
+                        bubblingMouseEvents={false}
                         pathOptions={{
                           stroke: false,
                           fill: true,
-                          fillOpacity: 0,
-                          opacity: 0,
+                          fillColor: "#ffffff",
+                          fillOpacity: 0.01,
+                          opacity: 1,
                         }}
                         eventHandlers={{
-                          click: () => onSelectStation(station.id),
+                          click: () => {
+                            onSelectStation(station.id);
+                          },
                         }}
                       >
                         <Tooltip
                           direction="top"
-                          offset={[0, -8]}
+                          offset={[0, -14]}
                           opacity={0.95}
                         >
                           <strong>{station.name[language]}</strong>
