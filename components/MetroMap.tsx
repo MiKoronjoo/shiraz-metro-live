@@ -19,6 +19,14 @@ import type { Language, MetroLine, TrainState } from "@/lib/types";
 
 const SHIRAZ_CENTER: [number, number] = [29.615, 52.535];
 
+const stationHitIcon = L.divIcon({
+  className: "station-hit-marker",
+  html: '<span class="station-hit-marker-inner"></span>',
+  iconSize: [44, 44],
+  iconAnchor: [22, 22],
+  tooltipAnchor: [0, -16],
+});
+
 interface MetroMapProps {
   lines: MetroLine[];
   visibleLineIds: string[];
@@ -318,28 +326,22 @@ export default function MetroMap({
 
                   return (
                     <Fragment key={station.id}>
-                      {/* Larger invisible interaction area */}
-                      <CircleMarker
-                        center={station.position}
-                        radius={14}
-                        interactive={true}
+                      {/* Dedicated station interaction marker */}
+                      <Marker
+                        position={station.position}
+                        icon={stationHitIcon}
+                        keyboard={true}
                         bubblingMouseEvents={false}
-                        pathOptions={{
-                          stroke: false,
-                          fill: true,
-                          fillColor: "#ffffff",
-                          fillOpacity: 0.01,
-                          opacity: 1,
-                        }}
                         eventHandlers={{
-                          click: () => {
+                          click: (event) => {
+                            event.originalEvent.stopPropagation();
                             onSelectStation(station.id);
                           },
                         }}
                       >
                         <Tooltip
                           direction="top"
-                          offset={[0, -14]}
+                          offset={[0, 0]}
                           opacity={0.95}
                         >
                           <strong>{station.name[language]}</strong>
@@ -353,7 +355,7 @@ export default function MetroMap({
                                 : copy.activeStop}
                           </span>
                         </Tooltip>
-                      </CircleMarker>
+                      </Marker>
 
                       {/* Visual station marker */}
                       <CircleMarker

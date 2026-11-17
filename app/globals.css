@@ -289,3 +289,33 @@ button { color: inherit; }
 .station-hint { color: var(--muted); font-size: 11px; line-height: 1.7; }
 .app-boot { display: grid; place-items: stretch; }
 .app-boot .map-loading { min-height: 100dvh; }
+
+/* Station interaction layer */
+.station-hit-marker {
+  background: transparent !important;
+  border: none !important;
+  width: 44px !important;
+  height: 44px !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.station-hit-marker-inner {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Keep station tooltip centered above its marker */
+.leaflet-tooltip-top {
+  margin-top: 0 !important;
+}
+
+.leaflet-tooltip {
+  white-space: nowrap;
+  text-align: center;
+}
