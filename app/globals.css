@@ -180,9 +180,44 @@ button { color: inherit; }
 .map-loading-pulse { width: 45px; height: 45px; border-radius: 50%; border: 4px solid var(--border); border-top-color: var(--red); animation: spin 900ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.train-marker-shell { background: transparent !important; border: 0 !important; transition: transform 180ms linear; }
-.train-marker { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--train-color); border: 3px solid white; box-shadow: 0 4px 15px rgba(0,0,0,.3), 0 0 0 3px color-mix(in srgb, var(--train-color) 25%, transparent); }
-.train-arrow { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 13px solid white; transform-origin: 50% 50%; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+.train-marker-shell {
+  background: transparent !important;
+  border: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  transition: none !important;
+  pointer-events: auto !important;
+}
+.train-marker-hit {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.train-marker {
+  width: var(--train-size, 34px);
+  height: var(--train-size, 34px);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--train-color);
+  border: 3px solid white;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, .3),
+    0 0 0 3px color-mix(in srgb, var(--train-color) 25%, transparent);
+  transition: width 180ms ease, height 180ms ease;
+}
+.train-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 13px solid white;
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25));
+}
 .train-popup .leaflet-popup-content-wrapper { border-radius: 17px; padding: 0; background: var(--panel-solid); color: var(--text); box-shadow: var(--shadow); }
 .train-popup .leaflet-popup-content { margin: 0; width: auto !important; }
 .train-popup .leaflet-popup-tip { background: var(--panel-solid); }
