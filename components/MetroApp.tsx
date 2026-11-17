@@ -29,22 +29,15 @@ const MetroMap = dynamic(() => import("@/components/MetroMap"), {
   ),
 });
 
-function useLiveClock(): Date | null {
-  const [now, setNow] = useState<Date | null>(null);
+function useLiveClock(): Date {
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    setNow(new Date());
-    let animationFrame = 0;
-    let lastPaint = 0;
-    const tick = (timestamp: number) => {
-      if (timestamp - lastPaint >= 200) {
-        lastPaint = timestamp;
-        setNow(new Date());
-      }
-      animationFrame = requestAnimationFrame(tick);
-    };
-    animationFrame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animationFrame);
+    const interval = window.setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+
+    return () => window.clearInterval(interval);
   }, []);
 
   return now;
@@ -144,17 +137,6 @@ export default function MetroApp() {
   const selectedArrivals = selectedStation
     ? getNextArrivals(simulation, selectedStation.id, secondsOfDay, 3)
     : [];
-
-  if (!now) {
-    return (
-      <div className="metro-app app-boot" dir="rtl" lang="fa">
-        <div className="map-loading" role="status">
-          <span className="map-loading-pulse" />
-          <span>در حال آماده‌سازی نقشه…</span>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div
